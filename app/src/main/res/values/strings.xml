@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BLETestApp</string>
     <string name="scan_for_devices">Scan for Devices</string>
+    <string name="bluetooth_app">Bluetooth App</string>
 </resources>

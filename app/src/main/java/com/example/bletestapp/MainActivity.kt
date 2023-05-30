@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,12 +22,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val btnScanBt = findViewById<Button>(R.id.connectBtn)
-        btnScanBt.setOnClickListener {
-            Log.d("BT BUTTON CLICKED", "Scan Button Clicked")
-            scanBluetooth(btnScanBt)
-        }
     }
     @RequiresApi(Build.VERSION_CODES.M)
     fun scanBluetooth(view: View) {
@@ -73,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun btScan() {
         Toast.makeText(this, "BlueTooth Connected Successfully", Toast.LENGTH_LONG).show()
-        Log.d("BT CONNECTED", "Bluetooth Connected")
+        Log.d("BT", "Bluetooth Connected")
     }
 //    private val bluetoothLeScanner = bluetoothAdapter.bluetoothLeScanner
 //    private var scanning = false
