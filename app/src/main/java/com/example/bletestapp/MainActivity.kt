@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,18 +23,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        scanBluetooth(findViewById<Button>(R.id.connectBtn))
     }
     @RequiresApi(Build.VERSION_CODES.M)
     fun scanBluetooth(view: View) {
-        val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
-        val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Device Doesn't Support Bluetooth", Toast.LENGTH_LONG).show()
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                bluetoothPermissionLauncher.launch(BLUETOOTH_CONNECT)
+        view.setOnClickListener {
+            val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
+            val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.adapter
+            if (bluetoothAdapter == null) {
+                Toast.makeText(this, "Device Doesn't Support Bluetooth", Toast.LENGTH_LONG).show()
             } else {
-                bluetoothPermissionLauncher.launch(BLUETOOTH_ADMIN)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    bluetoothPermissionLauncher.launch(BLUETOOTH_CONNECT)
+                } else {
+                    bluetoothPermissionLauncher.launch(BLUETOOTH_ADMIN)
+                }
             }
         }
     }
